@@ -1,8 +1,9 @@
 @startuml sequence-diagram
 
 actor User
-participant Alice as a
-participant Bob as b
+participant Requester as a
+participant Holder as b
+participant 2nd_requester as c
 
 group Startup
     a -> a: Generate ID
@@ -70,6 +71,19 @@ loop x3
 
 else
     a -> a: LED1 on
+end
+
+group Requester detects another request
+    c -> a: LED req(IDc, LED1)
+    a -> a: Drop request
+    a -> a: Compare IDa and IDc
+
+    alt IDa == IDc
+        a -> a: Generate new ID
+    else
+        note over a: No action
+    end
+
 end
 
 @enduml
