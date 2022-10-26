@@ -1,0 +1,75 @@
+@startuml sequence-diagram
+
+actor User
+participant Alice as a
+participant Bob as b
+
+group Startup
+    a -> a: Generate ID
+end
+
+group User action
+    User -> a: Button1 press
+    a -> a: Check if\nholding LED1
+
+    alt Holding 1
+        note over a: No action
+    else Not holding 1
+        a -> a: Switch to TX
+        a -> b: LED req(IDa, LED1)
+        a -> a: Switch to RX
+        a -> a: Begin timer
+    end
+
+end
+
+group Holder receives request
+    a -> b: LED req(IDa, LED1)
+    b -> b: Check if\nholding LED1
+
+    alt Holding 1
+        b -> b: LED1 off
+        b -> b: Switch to TX
+        b -> a: LED res(IDa, LED1)
+        b -> b: Check if\nholding LED2
+
+        alt Holding 2
+            b -> b: Switch to RX
+        else Holding nothing
+            b -> b: Disable radio
+        end
+
+    else Not holding 1
+        note over b: No action
+    end
+
+    b -> b: Compare IDa and IDb
+
+    alt IDa == IDb
+        b -> b: Generate new ID
+    else IDa != IDb
+        note over b: No action
+    end
+
+end
+
+group Requester receives response
+    b -> a: LED res(IDa, LED1)
+    a -> a: Switch to RX
+    a -> a: LED1 on
+end
+
+loop x3
+
+    group Timer timeout
+        a -> a: Switch to TX
+        a -> b: LED req(IDa, LED1)
+        a -> a: Switch to RX
+        a -> a: Begin timer
+    end
+
+else
+    a -> a: LED1 on
+end
+
+@enduml
