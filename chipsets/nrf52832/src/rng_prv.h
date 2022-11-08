@@ -22,8 +22,8 @@ typedef struct
 
 typedef struct
 {
-    RO_reg  VALUE   : 8;  // Bit 0-7 - Generated random number
-    RO_reg          : 0;
+    const uint8_t   VALUE   : 8;  // Bit 0-7 - Generated random number
+    RO_reg                  : 0;
 } tRng_valueReg;
 
 typedef struct
@@ -31,7 +31,7 @@ typedef struct
     RW_reg          TASKS_START;    // 0x000 Task starting the random number generator
     RW_reg          TASKS_STOP;     // 0x004 Task stopping the random number generator
     RO_reg          UNUSED_A[0x3E];
-    RO_reg          EVENTS_VALRDY;  // 0x100 Event being generated for every new random number written to the VALUE register
+    RW_reg          EVENTS_VALRDY;  // 0x100 Event being generated for every new random number written to the VALUE register
     RO_reg          UNUSED_B[0x3F];
     tRng_shortsReg  SHORTS;         // 0x200 Shortcut register
     RO_reg          UNUSED_C[0x40];
