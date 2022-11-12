@@ -12,3 +12,11 @@ void main( void )
 
     while( 1 ) {}
 }
+
+void panic( const char filename, const uint16_t line_number)
+{
+    while(1)
+    {
+        
+    }
+}
