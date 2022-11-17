@@ -122,37 +122,23 @@ typedef enum
 } tGpio_sense;
 
 /**
- * @brief Configures a pin as a standard input
+ * @brief Configures a pin as an input
  * 
- * @param[in] pin The pin to configure
+ * @param[in] pin   The pin to configure
+ * @param[in] pull_dir  Pull direction setting for the pin
+ * @param[in] sense Pin sensing mechanism setting
  */
-void gpio_configureInputPin(const tGpio_pin pin);
+void gpio_configureInputPin(const tGpio_pin pin,
+                            const tGpio_pull pull_dir,
+                            const tGpio_sense sense);
 
 /**
- * @brief Configures a pin as a customised input
+ * @brief Configures a pin as an output
  * 
- * @param[in] pin The pin to be configured
- * @param[in] pull The pull direction for the pin
- * @param[in] sense_type The sensing configuration to use
+ * @param[in] pin   The pin to configure
+ * @param[in] drive Pin drive configuration
  */
-void gpio_customiseInputPin(const tGpio_pin pin,
-                                const tGpio_pull pull,
-                                const tGpio_sense sense_type);
-
-/**
- * @brief Configure pin as a standard output
- * 
- * @param[in] pin The pin to be configured
- */
-void gpio_configureOutputPin(const tGpio_pin pin);
-
-/**
- * @brief Configure pin as a customised output
- * 
- * @param[in] pin The pin to be configured
- * @param[in] drive The pin drive setting
- */
-void gpio_customiseOutputPin(const tGpio_pin pin,
+void gpio_configureOutputPin(const tGpio_pin pin,
                                 const tGpio_drive drive);
 
 #endif  // GPIO_HAL_H
