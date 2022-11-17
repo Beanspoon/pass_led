@@ -1,12 +1,12 @@
 #include "gpio_prv.h"
 
 void gpio_configureInputPin(const tGpio_pin pin,
-                            const tGpio_pull pull_dir,
+                            const tGpio_pull pullDir,
                             const tGpio_sense sense)
 {
     GPIO.PINCNF[pin].DIR = GPIO_DIR_INPUT;
     GPIO.PINCNF[pin].INPUT_BUFFER = GPIO_INBUF_CONNECT;
-    GPIO.PINCNF[pin].PULL = pull_dir;
+    GPIO.PINCNF[pin].PULL = pullDir;
     GPIO.PINCNF[pin].SENSE = sense;
 }
 

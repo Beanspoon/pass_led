@@ -6,8 +6,8 @@
 
 void main( void )
 {
-    uint8_t node_id;
-    if(rng_generate(&node_id, sizeof(node_id)) != RNG_OK)
+    uint8_t nodeId;
+    if(rng_generate(&nodeId, sizeof(nodeId)) != RNG_OK)
     {
 
     }
@@ -15,7 +15,7 @@ void main( void )
     while( 1 ) {}
 }
 
-void panic( const char filename, const uint16_t line_number)
+void panic(const char filename, const uint16_t lineNumber)
 {
     gpio_configureOutputPin(LED0, GPIO_DRIVE_S0S1);
     gpio_configureOutputPin(LED1, GPIO_DRIVE_S0S1);

@@ -104,11 +104,11 @@ typedef enum
  * @brief Configures a pin as an input
  * 
  * @param[in] pin   The pin to configure
- * @param[in] pull_dir  Pull direction setting for the pin
+ * @param[in] pullDir   Pull direction setting for the pin
  * @param[in] sense Pin sensing mechanism setting
  */
 void gpio_configureInputPin(const tGpio_pin pin,
-                            const tGpio_pull pull_dir,
+                            const tGpio_pull pullDir,
                             const tGpio_sense sense);
 
 /**
