@@ -62,27 +62,6 @@ typedef enum
     GPIO_PIN_MAX
 } tGpio_pin;
 
-
-/**
- * @brief Pin direction enum
- *
- */
-typedef enum
-{
-    GPIO_DIR_INPUT,
-    GPIO_DIR_OUTPUT
-} tGpio_dir;
-
-/**
- * @brief Input buffer setting enum
- *
- */
-typedef enum
-{
-    GPIO_INBUF_CONNECT,
-    GPIO_INBUF_DISCONNECT
-} tGpio_inBuf;
-
 /**
  * @brief Pin pull direction enum (input)
  *
