@@ -120,4 +120,13 @@ void gpio_configureInputPin(const tGpio_pin pin,
 void gpio_configureOutputPin(const tGpio_pin pin,
                                 const tGpio_drive drive);
 
+/**
+ * @brief Set pin to state
+ * 
+ * @param[in] pin   The pin to set
+ * @param[in] state The state to set the pin to
+ */
+void gpio_writePin(const tGpio_pin pin,
+                    const tGpio_pinState state);
+
 #endif  // GPIO_HAL_H
