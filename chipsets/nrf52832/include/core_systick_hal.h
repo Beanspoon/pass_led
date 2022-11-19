@@ -2,7 +2,8 @@
 #define CORE_SYSTICK_HAL_H
 
 #include "board_cfg.h"
-#include "types.h"
+
+#include <stdint-gcc.h>
 
 #ifndef SYSTICK_TICK_FREQUENCY_HZ
 #error SYSTICK_TICK_FREQUENCY_HZ is not defined!

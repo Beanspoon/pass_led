@@ -1,7 +1,10 @@
 #include "core_systick_hal.h"
 #include "core_systick_prv.h"
 
+#include "types.h"
 #include "utils.h"
+
+#include <stdint-gcc.h>
 
 #define TEN_MS_FREQUENCY                (ONE_SECOND_IN_MS / 10u)
 #define SYSTICK_TICK_PERIODICITY_MS     (1000u / SYSTICK_TICK_FREQUENCY_HZ)

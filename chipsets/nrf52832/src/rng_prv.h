@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#include <stdint-gcc.h>
+
 typedef struct
 {
     tEnable VALRDY_STOP : 1; // Bit 0 - Shortcut between VALRDY event and STOP task

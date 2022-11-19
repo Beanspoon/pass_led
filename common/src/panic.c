@@ -1,8 +1,11 @@
 #include "panic.h"
 
 #include "core_systick_hal.h"
-#include "board_cfg.h"
 #include "gpio_hal.h"
+
+#include "board_cfg.h"
+
+#include <stdint-gcc.h>
 
 void panic_handler(const char *filename, const uint16_t lineNumber)
 {

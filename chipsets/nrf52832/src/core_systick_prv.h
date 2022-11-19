@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#include <stdint-gcc.h>
+
 /**
  * @brief Systick control and status register
  *

@@ -3,6 +3,9 @@
 
 #include "utils.h"
 
+#include <stddef.h>
+#include <stdint-gcc.h>
+
 void rng_init(void)
 {
     RNG.CONFIG.DERCEN = ENABLED;

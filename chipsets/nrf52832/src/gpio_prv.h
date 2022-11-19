@@ -5,6 +5,8 @@
 
 #include "types.h"
 
+#include <stdint-gcc.h>
+
 /**
  * @brief Pin direction enum
  *
