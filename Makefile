@@ -5,15 +5,11 @@ SRCS += \
 	$(wildcard common/src/*.c) \
 	$(wildcard chipsets/$(CHIPSET)/src/*.c)
 
-INCLUDES = \
+INCLUDES += \
 	include \
 	common/include \
 	chipsets/$(CHIPSET)/include \
 	boards/$(BOARD)
-
-SRCS_MAIN = \
-	chipsets/$(CHIPSET)/src/startup.c \
-	src/main.c
 
 CFLAGS += \
 	-mthumb \
@@ -40,18 +36,38 @@ LDFLAGS += \
 	-Wl,--print-memory-usage \
 	-Wl,-Map=flash.map \
 	-Wl,--gc-sections \
+	-Wl,-T link.ld
 
-OBJS := $(SRCS:.c=.o)
-DEPS := $(SRCS:.c=.d)
+OBJ_DIR := .objects
+
+OBJS := $(SRCS:%.c=$(OBJ_DIR)/%.o)
+DEPS := $(OBJS:%.o=%.d)
 
 CC := arm-none-eabi-gcc
 
 BUILD_DIR := build
 
-all: $(BUILD_DIR)/$(PROJECT).elf
+$(BUILD_DIR)/$(PROJECT).bin: $(BUILD_DIR)/$(PROJECT).elf $(BUILD_DIR)/$(PROJECT).lst | $(BUILD_DIR)
+	@arm-none-eabi-objcopy $< $@ -O binary
+	@arm-none-eabi-size $<
 
-$(BUILD_DIR)/$(PROJECT).elf: $(OBJS)
+$(BUILD_DIR)/$(PROJECT).lst: $(BUILD_DIR)/$(PROJECT).elf | $(BUILD_DIR)
+	@arm-none-eabi-objdump -D $< > $@
 
-clean: ; $(RM) $(OBJS) $(DEPS)
+$(BUILD_DIR)/$(PROJECT).elf: $(OBJS) | $(BUILD_DIR)
+	@echo "Linking $@"
+	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+	@echo
+
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+	@mkdir -p $(@D)
+	@echo "Compiling $<"
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR): ; @mkdir -p $@
+
+$(OBJ_DIR): ; @mkdir -p $@
+
+clean: ; $(RM) -r $(OBJ_DIR) $(BUILD_DIR)
 
 -include $(DEPS)
