@@ -117,6 +117,6 @@ typedef enum
  * @param[in] interrupt Interrupt to change
  * @param[in] targetState State to change to
  */
-void nvic_changeInterruptState( const tNvic_interrupt interrupt, const tEnableState targetState);
+void nvic_changeInterruptState( const tNvic_interrupt interrupt, const tEnable targetState);
 
 #endif // CORE_NVIC_H
