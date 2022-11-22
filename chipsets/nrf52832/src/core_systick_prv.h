@@ -4,6 +4,17 @@
 #include "types.h"
 
 #include <stdint-gcc.h>
+#include <stdbool.h>
+
+/**
+ * @brief Systick clock source enum
+ * 
+ */
+typedef enum
+{
+    SYSTICK_SOURCE_EXTERNAL,
+    SYSTICK_SOURCE_PROCESSOR
+} tSystick_clockSource;
 
 /**
  * @brief Systick control and status register
@@ -11,12 +22,12 @@
  */
 typedef struct
 {
-    RW_reg  CSR_SYST_EN     : 1;    // Bit[0] Status of the counter; 0: disabled, 1: enabled
-    RW_reg  CSR_TICKINT     : 1;    // Bit[1] Interrupt status on counter=0; 0: disabled, 1: enabled
-    RW_reg  CSR_CLKSOURCE   : 1;    // Bit[2] Systick clock source; 0: external, 1: processor
-    const uint16_t          : 0;
-    RO_reg  CSR_COUNTFLAG   : 1;    // Bit[16] Indicates if counter has reached 0 since last read of this register; 0: false, 1: true
-    RO_reg                  : 0;
+    tEnable                 CSR_SYST_EN     : 1;    // Bit[0] Status of the counter
+    tEnable                 CSR_TICKINT     : 1;    // Bit[1] Interrupt enable for counter=0
+    tSystick_clockSource    CSR_CLKSOURCE   : 1;    // Bit[2] Systick clock source
+    const uint16_t                          : 0;
+    const bool              CSR_COUNTFLAG   : 1;    // Bit[16] Indicates if counter has reached 0 since last read of this register
+    RO_reg                                  : 0;
 } tSystick_csrReg;
 
 /**
