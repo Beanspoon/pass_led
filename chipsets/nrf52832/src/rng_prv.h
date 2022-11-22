@@ -44,7 +44,7 @@ typedef struct
     tRng_valueReg   VALUE;          // 0x508 Random number output register
 } tRng_regMap;
 
-#define RNG_BASE_ADDRESS    0x40000000
+#define RNG_BASE_ADDRESS    0x4000D000
 #define RNG                 (*((volatile tRng_regMap *)RNG_BASE_ADDRESS))
 
 #endif

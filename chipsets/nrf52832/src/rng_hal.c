@@ -15,10 +15,9 @@ tRng_status rng_generate(void *pBuffer, const size_t size)
 {
     rng_init();
     
-    tRng_status operation_status = RNG_ERROR;
     uint8_t *pBufferByte = pBuffer;
-    RNG.EVENTS_VALRDY = 0U;
     RNG.TASKS_START = ENABLED;
+    RNG.EVENTS_VALRDY = 0U;
 
     for(size_t bufferOffset = 0U; bufferOffset < size; ++bufferOffset)
     {
@@ -26,4 +25,6 @@ tRng_status rng_generate(void *pBuffer, const size_t size)
         pBufferByte[bufferOffset] = RNG.VALUE.VALUE;
         RNG.EVENTS_VALRDY = 0u;
     }
+
+    return RNG_OK;
 }
