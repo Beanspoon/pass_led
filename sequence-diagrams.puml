@@ -7,6 +7,7 @@ participant 2nd_requester as c
 
 group Startup
     a -> a: Generate ID
+    a -> a: Ramp up radio\nin RX
 end
 
 group User action
@@ -32,14 +33,7 @@ group Holder receives request
         b -> b: LED1 off
         b -> b: Switch to TX
         b -> a: LED res(IDa, LED1)
-        b -> b: Check if\nholding LED2
-
-        alt Holding 2
-            b -> b: Switch to RX
-        else Holding nothing
-            b -> b: Disable radio
-        end
-
+        b -> b: Switch to RX
     else Not holding 1
         note over b: No action
     end
@@ -56,21 +50,24 @@ end
 
 group Requester receives response
     b -> a: LED res(IDa, LED1)
-    a -> a: Switch to RX
     a -> a: LED1 on
+    a -> a: Cancel timer
+    a -> a: Reset retries
 end
 
-loop x3
+group Timer timeout
 
-    group Timer timeout
+    alt Retries < 3
         a -> a: Switch to TX
         a -> b: LED req(IDa, LED1)
         a -> a: Switch to RX
         a -> a: Begin timer
+        a -> a: Increment retries
+    else
+        a -> a: LED1 on
+        a -> a: Reset retries
     end
-
-else
-    a -> a: LED1 on
+    
 end
 
 group Requester detects another request
