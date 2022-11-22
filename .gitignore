@@ -2,3 +2,5 @@
 build
 
 flash.map
+*.jdebug
+*.jdebug.user
