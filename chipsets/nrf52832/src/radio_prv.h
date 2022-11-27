@@ -58,16 +58,22 @@ typedef enum
     RADIO_SHORTS_MAX
 } tRadio_shorts;
 
+typedef enum
+{
+    RADIO_BASE_FREQUENCY_2400MHZ,
+    RADIO_BASE_FREQUENCY_2360MHZ
+} tRadio_baseFreqency;
+
 /**
  * @brief Definition of the frequency setting register
  *
  */
 typedef struct
 {
-    RW_reg  FREQUENCY           : 7; // Bit[0-6] Radio channel frequency (2400 + FREQUENCY) MHz [0-100]
-    uint8_t                     : 0;
-    RW_reg  MAP                 : 1; // Bit[8] Base frequency 0: 2400 MHz, 1: 2360 MHz
-    RW_reg                      : 0;
+    RW_reg                  FREQUENCY   : 7; // Bit[0-6] Radio channel frequency (2400 + FREQUENCY) MHz [0-100]
+    uint8_t                             : 0;
+    tRadio_baseFrequency    MAP         : 1; // Bit[8] Base frequency 0: 2400 MHz, 1: 2360 MHz
+    RW_reg                              : 0;
 } tRadio_frequencyReg;
 
 /**
