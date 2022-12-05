@@ -1,4 +1,5 @@
 #include "rng_hal.h"
+#include "radio_ctrl.h"
 #include "gpio_hal.h"
 
 #include "panic.h"
@@ -15,6 +16,9 @@ void main( void )
     {
         panic();
     }
+
+    // Init radio
+    radioCtrl_init();
 
     // Configure GPIO
     gpio_configureInputPin(BTN0, GPIO_PULL_UP, GPIO_SENSE_DISABLED);
