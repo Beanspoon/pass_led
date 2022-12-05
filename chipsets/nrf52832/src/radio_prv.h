@@ -1,6 +1,8 @@
 #ifndef RADIO_PRV_H
 #define RADIO_PRV_H
 
+#include "types.h"
+
 /**
  * @brief Radio tasks enum
  *
@@ -62,7 +64,7 @@ typedef enum
 {
     RADIO_BASE_FREQUENCY_2400MHZ,
     RADIO_BASE_FREQUENCY_2360MHZ
-} tRadio_baseFreqency;
+} tRadio_baseFrequency;
 
 /**
  * @brief Definition of the frequency setting register
@@ -115,7 +117,7 @@ typedef struct
     RW_reg          BALEN   : 3; // Bit[16-18] Base address length in bytes
     const uint8_t           : 0;
     RW_reg          ENDIAN  : 1; // Bit[24] On-air endianness of packet (S0, LENGTH, S1 & PAYLOAD). 0: Little, 1: Big
-    tEnableState    WHITEEN : 1; // Bit[25] 0: disable, or 1: enable packet whitening
+    tEnable         WHITEEN : 1; // Bit[25] 0: disable, or 1: enable packet whitening
     RO_reg                  : 0;
 } tRadio_pCnfRegs;
 
@@ -154,22 +156,22 @@ typedef enum
  */
 typedef struct
 {
-    tEnableState   ENA0    : 1;    // Bit[0] Enable device address matching using address 0
-    tEnableState   ENA1    : 1;    // Bit[1] Enable device address matching using address 1
-    tEnableState   ENA2    : 1;    // Bit[2] Enable device address matching using address 2
-    tEnableState   ENA3    : 1;    // Bit[3] Enable device address matching using address 3
-    tEnableState   ENA4    : 1;    // Bit[4] Enable device address matching using address 4
-    tEnableState   ENA5    : 1;    // Bit[5] Enable device address matching using address 5
-    tEnableState   ENA6    : 1;    // Bit[6] Enable device address matching using address 6
-    tEnableState   ENA7    : 1;    // Bit[7] Enable device address matching using address 7
-    tEnableState   TXADD0  : 1;    // Bit[8] Txadd for device address 0
-    tEnableState   TXADD1  : 1;    // Bit[9] Txadd for device address 1
-    tEnableState   TXADD2  : 1;    // Bit[10] Txadd for device address 2
-    tEnableState   TXADD3  : 1;    // Bit[11] Txadd for device address 3
-    tEnableState   TXADD4  : 1;    // Bit[12] Txadd for device address 4
-    tEnableState   TXADD5  : 1;    // Bit[13] Txadd for device address 5
-    tEnableState   TXADD6  : 1;    // Bit[14] Txadd for device address 6
-    tEnableState   TXADD7  : 1;    // Bit[15] Txadd for device address 7
+    tEnable ENA0    : 1;    // Bit[0] Enable device address matching using address 0
+    tEnable ENA1    : 1;    // Bit[1] Enable device address matching using address 1
+    tEnable ENA2    : 1;    // Bit[2] Enable device address matching using address 2
+    tEnable ENA3    : 1;    // Bit[3] Enable device address matching using address 3
+    tEnable ENA4    : 1;    // Bit[4] Enable device address matching using address 4
+    tEnable ENA5    : 1;    // Bit[5] Enable device address matching using address 5
+    tEnable ENA6    : 1;    // Bit[6] Enable device address matching using address 6
+    tEnable ENA7    : 1;    // Bit[7] Enable device address matching using address 7
+    tEnable TXADD0  : 1;    // Bit[8] Txadd for device address 0
+    tEnable TXADD1  : 1;    // Bit[9] Txadd for device address 1
+    tEnable TXADD2  : 1;    // Bit[10] Txadd for device address 2
+    tEnable TXADD3  : 1;    // Bit[11] Txadd for device address 3
+    tEnable TXADD4  : 1;    // Bit[12] Txadd for device address 4
+    tEnable TXADD5  : 1;    // Bit[13] Txadd for device address 5
+    tEnable TXADD6  : 1;    // Bit[14] Txadd for device address 6
+    tEnable TXADD7  : 1;    // Bit[15] Txadd for device address 7
     RO_reg          : 0;
 } tRadio_daCnfReg;
 
