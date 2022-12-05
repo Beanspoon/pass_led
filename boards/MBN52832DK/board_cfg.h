@@ -3,6 +3,9 @@
 
 #include "gpio_hal.h"
 
+#define BTN0    GPIO_PIN13
+#define BTN1    GPIO_PIN14
+
 #define LED0    GPIO_PIN17
 #define LED1    GPIO_PIN18
 
