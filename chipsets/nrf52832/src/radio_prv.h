@@ -1,6 +1,8 @@
 #ifndef RADIO_PRV_H
 #define RADIO_PRV_H
 
+#include "radio_hal.h"
+
 #include "types.h"
 
 /**
@@ -59,12 +61,6 @@ typedef enum
     RADIO_SHORTS_DISABLED_RSSISTOP = 8u,
     RADIO_SHORTS_MAX
 } tRadio_shorts;
-
-typedef enum
-{
-    RADIO_BASE_FREQUENCY_2400MHZ,
-    RADIO_BASE_FREQUENCY_2360MHZ
-} tRadio_baseFrequency;
 
 /**
  * @brief Definition of the frequency setting register
