@@ -32,17 +32,6 @@ typedef enum
 } tRadio_logicalAddress;
 
 /**
- * @brief Radio base address length enum
- * 
- */
-typedef enum
-{
-    RADIO_2_BYTE_BASE_ADDRESS = 2,
-    RADIO_3_BYTE_BASE_ADDRESS = 3,
-    RADIO_4_BYTE_BASE_ADDRESS = 4
-} tRadio_baseAddressLength;
-
-/**
  * @brief Enum describing the endianness of the S0, Length, S1 and Payload fields in radio
  *  packets
  * 
@@ -102,9 +91,9 @@ void radio_configureDataWhitening(const uint8_t iv, const tEnable state);
 /**
  * @brief Sets the base address length to use
  * 
- * @param[in] length Enum selecting the length of the base address
+ * @param[in] length Length of the base address in bytes [2-4]
  */
-void radio_setBaseAddressLength(const tRadio_baseAddressLength length);
+void radio_setBaseAddressLength(const uint8_t length);
 
 /**
  * @brief Sets the primary address
