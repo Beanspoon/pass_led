@@ -5,6 +5,22 @@
 
 #include "board_cfg.h"
 
+typedef enum
+{
+    RADIO_CTRL_STATE_INIT,
+} tRadioCtrl_state;
+
+typedef struct
+{
+    tRadioCtrl_state state
+} tRadioCtrl_context;
+
+static tRadioCtrl_context* getContext(void)
+{
+    static tRadioCtrl_context context = {0u};
+    return &context;
+}
+
 void radioCtrl_init(void)
 {
     clock_startHFClock();
