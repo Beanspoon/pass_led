@@ -21,23 +21,23 @@
 #define RADIO_BASE_FREQUENCY                RADIO_BASE_FREQUENCY_2360MHZ
 #define RADIO_CHANNEL_FREQUENCY             0u
 
-#define DATA_WHITENING_IV                   13u
+#define RADIO_DATA_WHITENING_IV             13u
 
 #define RADIO_PRIMARY_ADDRESS_PREFIX        0xde
 #define RADIO_PRIMARY_ADDRESS_BASE          0xadbeef00
-#define RADIO_BASE_ADDRESS_LENGTH           RADIO_3_BYTE_BASE_ADDRESS
+#define RADIO_BASE_ADDRESS_LENGTH           3u
 #define RADIO_RX_ADDRESS                    RADIO_LOGADDR_PRIMARY
 
 #define RADIO_PACKET_PREAMBLE_LENGTH        RADIO_8_BIT_PREAMBLE
 #define RADIO_PACKET_S0_LENGTH              0u
 #define RADIO_PACKET_LENGTH_FIELD_LENGTH    4u
 #define RADIO_PACKET_S1_LENGTH              0u
-#define RADIO_S1_INCLUSION                  RADIO_AUTO_INCLUDE_S1
+#define RADIO_PACKET_S1_INCLUSION           RADIO_AUTO_INCLUDE_S1
 #define RADIO_PACKET_MAX_PAYLOAD_LENGTH     8u
 #define RADIO_PACKET_STATIC_LENGTH          0u
 #define RADIO_PACKET_ENDIANNESS             RADIO_LITTLE_ENDIAN
 
-#define RADIO_CRC_LENGTH                    RADIO_3_BYTE_CRC
+#define RADIO_CRC_LENGTH                    3u
 #define RADIO_CRC_ADDRESS_BEHAVIOUR         RADIO_CRC_SKIP_ADDRESS
 #define RADIO_CRC_IV                        0x555555
 #define RADIO_CRC_POLYNOMIAL                BITMASK(10u) |\
