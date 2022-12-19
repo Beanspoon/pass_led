@@ -5,6 +5,7 @@ MEMORY
 }
 
 STACK_SIZE = 0x400;
+__ram_end = ORIGIN(ram) + LENGTH(ram);
 
 SECTIONS
 {
