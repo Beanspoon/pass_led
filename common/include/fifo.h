@@ -2,6 +2,7 @@
 #define FIFO_H
 
 #include <stddef.h>
+#include <stdbool.h>
 
 /**
  * @brief Status value returned from FIFO buffer functions indicating
@@ -28,6 +29,13 @@ typedef struct
     void *          pWrite;         // Write pointer
     void * const    pBuffer;        // Pointer to the buffer in memory
 } tFifo_instance;
+
+#define FIFO_CREATE(pBuffer, elementSize, bufferSize, allowOverwrite)   {\
+    .pBuffer = pBuffer,\
+    .elementSize = elementSize,\
+    .bufferSize = bufferSize,\
+    .allowIverwrite = allowOverwrite\
+    }
 
 /**
  * @brief Write a new element to the FIFO buffer
