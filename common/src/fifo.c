@@ -51,6 +51,29 @@ tFifo_status fifo_write(tFifo_instance * const pInstance, const void * const pEl
     if(isFull)
     {
         // Read pointer must also be updated
-        uint8_t *pNextRead = pRead + 
+
+tFifo_status fifo_getStatus(const tFifo_instance* const pInstance)
+{
+    // Early return for invalid argument
+    if(pInstance == NULL ||
+        pInstance->pRead == NULL ||
+        pInstance->pWrite == NULL)
+    {
+        return FIFO_STATUS_ERROR;
+    }
+
+    if(pInstance->pRead == pInstance->pWrite)
+    {
+        // If the pointers point to the same element, the buffer is empty
+        return FIFO_STATUS_EMPTY;
+    }
+    else if(getNextLocationForPointer(pInstance->pWrite, pInstance) == pInstance->pRead)
+    {
+        // If the read pointer is one element ahead of the write pointer, the buffer is full
+        return FIFO_STATUS_FULL;
+    }
+    else
+    {
+        return FIFO_STATUS_OK;
     }
 }
