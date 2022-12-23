@@ -22,35 +22,32 @@ static void* getNextLocationForPointer(const void* const pointer, const tFifo_in
     return (void *)pNextLocation;
 }
 
-tFifo_status fifo_write(tFifo_instance * const pInstance, const void * const pElement)
+tFifo_status fifo_write(tFifo_instance* const pInstance, const void* const pElement)
 {
-    if(pInstance == NULL ||
-        pElement == NULL ||
-        pInstance->pBuffer == NULL ||
-        pInstance->pWrite == NULL)
+    tFifo_status bufferStatus = fifo_getStatus(pInstance);
+    if(bufferStatus == FIFO_STATUS_ERROR)
     {
-        return FIFO_STATUS_ERROR;
+        // Early return for error state
+        return bufferStatus;
     }
 
-    const uint8_t *pRead = pInstance->pRead;
-    uint8_t *pWrite = pInstance->pWrite;
-    bool isFull = (pRead == (pWrite + pInstance->elementSize));
-
+    bool isFull = (bufferStatus == FIFO_STATUS_FULL);
     if(isFull && !pInstance->allowOverwrite)
     {
+        // Early return if buffer is full and overwriting is forbidden
         return FIFO_STATUS_FULL;
     }
 
-    memcpy(pWrite, pElement, pInstance->elementSize);
+    memcpy(pInstance->pWrite, pElement, pInstance->elementSize);
 
-    uint8_t *pNextWrite = pWrite + pInstance->elementSize;
-    uint8_t *pStart = pInstance->pBuffer;
-    size_t bufferSize_bytes = pInstance->bufferSize * pInstance->elementSize;
-    pInstance->pWrite = (pNextWrite >= pStart + bufferSize_bytes) ? pStart : pNextWrite;
+    pInstance->pWrite = getNextLocationForPointer(pInstance->pWrite, pInstance);
 
     if(isFull)
     {
         // Read pointer must also be updated
+        pInstance->pRead = getNextLocationForPointer(pInstance->pRead, pInstance);
+    }
+}
 
 tFifo_status fifo_getStatus(const tFifo_instance* const pInstance)
 {
