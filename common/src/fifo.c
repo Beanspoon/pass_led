@@ -24,14 +24,14 @@ static void* getNextLocationForPointer(const void* const pointer, const tFifo_in
 
 tFifo_status fifo_write(tFifo_instance* const pInstance, const void* const pElement)
 {
-    tFifo_status bufferStatus = fifo_getStatus(pInstance);
+    const tFifo_status bufferStatus = fifo_getStatus(pInstance);
     if(bufferStatus == FIFO_STATUS_ERROR)
     {
         // Early return for error state
         return bufferStatus;
     }
 
-    bool isFull = (bufferStatus == FIFO_STATUS_FULL);
+    const bool isFull = (bufferStatus == FIFO_STATUS_FULL);
     if(isFull && !pInstance->allowOverwrite)
     {
         // Early return if buffer is full and overwriting is forbidden

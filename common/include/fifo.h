@@ -22,12 +22,12 @@ typedef enum
  */
 typedef struct
 {
-    const size_t    elementSize;    // Size of the elements in bytes, plus any alignment padding
-    const size_t    numElements;    // Size of the buffer in number of elements
-    const bool      allowOverwrite; // Is writing to a full buffer allowed?
-    void *          pRead;          // Read pointer
-    void *          pWrite;         // Write pointer
-    void * const    pBuffer;        // Pointer to the buffer in memory
+    const size_t        elementSize;    // Size of the elements in bytes, plus any alignment padding
+    const size_t        numElements;    // Size of the buffer in number of elements
+    const bool          allowOverwrite; // Is writing to a full buffer allowed?
+    void *              pRead;          // Read pointer
+    void *              pWrite;         // Write pointer
+    const void * const  pBuffer;        // Pointer to the buffer in memory
 } tFifo_instance;
 
 #define FIFO_CREATE(elementArray, numElements, allowOverwrite)  \
