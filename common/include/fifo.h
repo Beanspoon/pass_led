@@ -30,11 +30,14 @@ typedef struct
     void * const    pBuffer;        // Pointer to the buffer in memory
 } tFifo_instance;
 
-#define FIFO_CREATE(pBuffer, elementSize, bufferSize, allowOverwrite)   {\
-    .pBuffer = pBuffer,\
-    .elementSize = elementSize,\
-    .bufferSize = bufferSize,\
-    .allowIverwrite = allowOverwrite\
+#define FIFO_CREATE(elementArray, numElements, allowOverwrite)  \
+    {\
+        .pBuffer = elementArray,\
+        .elementSize = (sizeof(elementArray) / numElements),\
+        .numElements = numElements,\
+        .allowOverwrite = allowOverwrite,\
+        .pRead = (void *)&elementArray,\
+        .pWrite = (void *)&elementArray\
     }
 
 /**
