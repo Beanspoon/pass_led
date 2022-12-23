@@ -16,7 +16,7 @@ static void* getNextLocationForPointer(const void* const pointer, const tFifo_in
 {
     const uint8_t * const pByteAligned = (uint8_t *)pointer;
     const uint8_t *pNextLocation = pByteAligned + pInstance->elementSize;
-    const size_t bufferSize_bytes = pInstance->elementSize * pInstance->bufferSize;
+    const size_t bufferSize_bytes = pInstance->elementSize * pInstance->numElements;
     const uint8_t * const pStart = (uint8_t *)pInstance->pBuffer;
     pNextLocation = (pNextLocation < pStart + bufferSize_bytes) ? pNextLocation : pStart;
     return (void *)pNextLocation;
