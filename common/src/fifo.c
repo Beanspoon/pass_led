@@ -28,7 +28,7 @@ tFifo_status fifo_write(tFifo_instance* const pInstance, const void* const pElem
     if(bufferStatus == FIFO_STATUS_ERROR)
     {
         // Early return for error state
-        return bufferStatus;
+        return FIFO_STATUS_ERROR;
     }
 
     const bool isFull = (bufferStatus == FIFO_STATUS_FULL);
