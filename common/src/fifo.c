@@ -44,7 +44,32 @@ tFifo_status fifo_write(tFifo_instance* const pInstance, const void* const pElem
 
     if(isFull)
     {
-        // Read pointer must also be updated
+        // Read pointer must also be updated as oldest element has been overwritten
+        pInstance->pRead = getNextLocationForPointer(pInstance->pRead, pInstance);
+    }
+
+    return FIFO_STATUS_OK;
+}
+
+tFifo_status fifo_read(tFifo_instance* const pInstance, void * const pReadBuffer, const bool peek)
+{
+    const tFifo_status instanceStatus = fifo_getStatus(pInstance);
+    if(instanceStatus == FIFO_STATUS_ERROR ||
+        pReadBuffer == NULL)
+    {
+        // Early return due to invalid arguments
+        return FIFO_STATUS_ERROR;
+    }
+    else if(instanceStatus == FIFO_STATUS_EMPTY)
+    {
+        // Early return as there is nothing to read
+        return FIFO_STATUS_EMPTY;
+    }
+
+    memcpy(pReadBuffer, pInstance->pRead, pInstance->elementSize);
+
+    if(!peek)
+    {
         pInstance->pRead = getNextLocationForPointer(pInstance->pRead, pInstance);
     }
 }
