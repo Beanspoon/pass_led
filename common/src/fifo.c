@@ -72,6 +72,22 @@ tFifo_status fifo_read(tFifo_instance* const pInstance, void * const pReadBuffer
     {
         pInstance->pRead = getNextLocationForPointer(pInstance->pRead, pInstance);
     }
+
+    return FIFO_STATUS_OK;
+}
+
+tFifo_status fifo_clear(tFifo_instance* const pInstance)
+{
+    if(fifo_getStatus(pInstance) == FIFO_STATUS_ERROR)
+    {
+        // Early return due to invalid arguments
+        return FIFO_STATUS_ERROR;
+    }
+
+    // Move read pointer to write pointer - indicates FIFO buffer is empty
+    pInstance->pRead = pInstance->pWrite;
+
+    return FIFO_STATUS_OK;
 }
 
 tFifo_status fifo_getStatus(const tFifo_instance* const pInstance)
